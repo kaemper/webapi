@@ -8,5 +8,12 @@
         <p>POST /api/auth/login</p>
         <p>GET /protected</p>
 
+        schlüssel generieren <br>
+        openssl genrsa -out key.pem <br>
+        csr stellen <br>
+        openssl req -new -key key.pem -out csr.pem <br>
+        selber zertifizieren <br>
+        openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem <br>
+
     </body>
 </html>
