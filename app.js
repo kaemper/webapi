@@ -17,6 +17,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+//cors
 app.use(cors());
 app.use(bodyParser.json());
 
