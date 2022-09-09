@@ -1,11 +1,10 @@
-'use strict'
+"use strict";
 
 require("dotenv").config();
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 
 router.post("/login", (req, res) => {
-  console.log(req.body);
   const username = req.body.name;
   const password = req.body.password;
 
