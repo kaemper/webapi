@@ -12,8 +12,6 @@ module.exports  = function (req, res, next) {
     const authStrings = req.header("Authorization").split(' ');
     let authorizationMethod = authStrings[0];
     let token = authStrings[1];
-    //console.log(authorizationMethod);
-    //console.log(token);
 
     if (!token) {
         return res.status(401).send("No token specified.");
