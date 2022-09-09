@@ -5,8 +5,11 @@ require("dotenv").config();
 const path = require('path');
 const fs = require('fs');
 const express = require("express");
+
+const httpOrHttps = process.env.HTTP_OR_HTTPS || HTTP;
 const http = require('http');
-//const https = require('https');
+const https = require('https');
+
 const jwt = require("jsonwebtoken");
 const verify = require("./verifyToken");
 const cors = require('cors');
@@ -32,20 +35,20 @@ app.get('/protected2', verify, (req, res) =>{
 
 const port = process.env.PORT || 3000;
 
-http
-  .createServer(app)
-  .listen(port, ()=>{
-    console.log("API listens on port " + port)
-  });
-
-/*
-https
-  .createServer({
-    key: fs.readFileSync("key.pem"),
-    cert: fs.readFileSync("cert.pem"),
-  }, 
-  app)
-  .listen(port, ()=>{
-    console.log("API listens on port " + port)
-  });
-*/
+if (httpOrHttps === 'HTTP') {
+    http
+    .createServer(app)
+    .listen(port, ()=>{
+        console.log("API listens via http on port " + port)
+    });
+} else {
+    https
+    .createServer({
+        key: fs.readFileSync("key.pem"),
+        cert: fs.readFileSync("cert.pem"),
+    }, 
+    app)
+    .listen(port, ()=>{
+        console.log("API listens via https on port " + port)
+    });
+}
